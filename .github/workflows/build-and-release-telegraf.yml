@@ -21,9 +21,11 @@ jobs:
       - name: Extract Telegraf version
         id: telegraf-version
         run: |
-          # Extract version from Dockerfile
           TELEGRAF_VERSION=$(grep -oP '(?<=FROM telegraf:).*' Dockerfile)
           echo "TELEGRAF_VERSION=$TELEGRAF_VERSION" >> $GITHUB_ENV
+          echo "::set-output name=version::$TELEGRAF_VERSION"
+        outputs:
+          telegraf_version: ${{ steps.telegraf-version.outputs.version }}
 
       - name: Build and push Docker image
         run: |
@@ -40,8 +42,8 @@ jobs:
       - name: Create GitHub release
         uses: actions/create-release@v1
         with:
-          tag_name: ${{ env.TELEGRAF_VERSION }}
-          release_name: Release ${{ env.TELEGRAF_VERSION }}
+          tag_name: ${{ needs.build-and-push-docker.outputs.telegraf_version }}
+          release_name: Release v${{ needs.build-and-push-docker.outputs.telegraf_version }}
           body: |
             Docker image: `ghcr.io/${{ github.repository_owner }}/telegraf-smart:${{ env.TELEGRAF_VERSION }}`
           draft: false

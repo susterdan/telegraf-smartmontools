@@ -1,6 +1,4 @@
-
-
-FROM telegraf:${TELEGRAF_VERSION}
+FROM telegraf:1.32.2
 
 # Install smartmontools and nvme-cli
 RUN apt-get update && \

@@ -37,7 +37,7 @@ jobs:
         uses: actions/create-release@v1
         with:
           tag_name: ${{ env.TELEGRAF_VERSION }}
-          release_name: Release v${{ env.TELEGRAF_VERSION }}
+          release_name: v${{ env.TELEGRAF_VERSION }}
           body: |
             Docker image: `ghcr.io/${{ github.repository_owner }}/telegraf-smart:${{ env.TELEGRAF_VERSION }}`
           draft: false

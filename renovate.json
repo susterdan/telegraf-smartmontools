@@ -1,9 +1,15 @@
 {
-  "extends": ["config:base"],
+  "extends": [
+    "config:recommended"
+  ],
   "packageRules": [
     {
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["telegraf"],
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "telegraf"
+      ],
       "groupName": "telegraf base image",
       "automerge": true,
       "commitMessageTopic": "Update Telegraf Docker base image"
@@ -11,4 +17,3 @@
   ],
   "automerge": true
 }
-

@@ -3,9 +3,7 @@ FROM telegraf:1.32.3
 # Install smartmontools and nvme-cli
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    smartmontools \
-    nvme-cli && \
-    sudo && \
+    smartmontools nvme-cli sudo && \
     rm -rf /var/lib/apt/lists/*
 
 RUN echo "telegraf ALL=(ALL) NOPASSWD: /usr/sbin/smartctl, /usr/sbin/nvme" >> /etc/sudoers.d/telegraf
